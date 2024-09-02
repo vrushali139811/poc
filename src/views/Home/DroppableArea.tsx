@@ -41,8 +41,8 @@ const DroppableArea: React.FC<DropProps> = ({ index, onDrop, one }) => {
       }}>
       {one.image && <img src={one?.image} key={one.id} style={{
         width: 200,
-        height: 200,
-        objectFit: 'cover',
+        height:'120px',
+        objectFit:'cover',
       }} />}
 
     </div>
