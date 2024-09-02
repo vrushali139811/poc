@@ -3,20 +3,7 @@ import {  useDrop } from 'react-dnd';
 
 
 
-const images = [
-  { id: 1, image: 'https://media.istockphoto.com/id/2153544401/photo/group-of-kazakh-eagle-hunters-riding-horses-in-bayan-olgii-west-mongolia.jpg?s=1024x1024&w=is&k=20&c=Ix4AFt4OCqohgvUITKPazJpqI9NKTy9ES108NsOXBvk=' },
-  { id: 2, image: 'https://w7.pngwing.com/pngs/114/579/png-transparent-pink-cross-stroke-ink-brush-pen-red-ink-brush-ink-leave-the-material-text.png' },
-  { id: 3, image: 'https://media.istockphoto.com/id/2153544403/photo/group-of-kazakh-eagle-hunters-riding-horses-along-river-bayan-olgii-west-mongolia.jpg?s=1024x1024&w=is&k=20&c=OBXLVMG8vXTvMIWHQg7a7LSnWAYSqeVT3e0bThrpcPc=' }
-];
 
-const data = [
-  {},
-  {},
-  {},
-  {},
-  {},
-  {}
-];
 
 interface DropProps {
   index: number;
@@ -29,7 +16,7 @@ interface DropProps {
 
 const DroppableArea: React.FC<DropProps> = ({ index, onDrop, one }) => {
   
-    const [{ isOver }, drop] = useDrop(() => ({
+    const [, drop] = useDrop(() => ({
       accept: 'item',
       drop: (item) => onDrop(item, index),
       collect: (monitor) => ({

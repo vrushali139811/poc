@@ -7,8 +7,8 @@ import {  useDrag,  } from 'react-dnd';
 
 interface MyComponentProps {
   image: string;         // Assuming image is a URL or path to an image
-  id: string;            // Assuming id is a unique identifier, probably a string
-  list: Array<string>;   // Assuming list is an array of strings; adjust if needed
+  id: number;            // Assuming id is a unique identifier, probably a string
+  list: Array<any>;   // Assuming list is an array of strings; adjust if needed
   index: number;         // Assuming index is a numeric index
 }
 

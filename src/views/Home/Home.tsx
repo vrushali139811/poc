@@ -4,7 +4,7 @@ import { DndProvider,  } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import DroppableArea from './DroppableArea';
 import DraggableItem from './DraggableItem';
-import { TouchBackend } from 'react-dnd-touch-backend';
+// import { TouchBackend } from 'react-dnd-touch-backend';
 import imageOne from 'assets/images/img1.png'
 import imageTwo from 'assets/images/img2.png'
 import imageThree from 'assets/images/img3.png'
@@ -43,7 +43,7 @@ const data = [
 
 
 const Home = () => {
-  const [items, setItems] = useState(images);
+
   const [list,setList]=useState(data)
 
   const handleDrop = (item:any, index:any) => {
@@ -57,7 +57,7 @@ const Home = () => {
    })
     // Handle drop logic here
   };
-  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  // const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
   return (
     <DndProvider backend={ HTML5Backend}>
@@ -72,8 +72,8 @@ const Home = () => {
           </div>
           <div className={style.scrollContainer}    style={{height:300,overflow:"scroll" }}>
             <div className={style.pot} style={{display: 'flex',padding:10}}>
-            {items.map((image,index) => (
-              <DraggableItem key={image.id} id={image.id} image={image.image} index={index} list={items} />
+            {images.map((image,index) => (
+              <DraggableItem key={image.id} id={image.id} image={image.image} index={index} list={images} />
             ))}
             </div>
           </div>
