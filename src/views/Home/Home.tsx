@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import style from './Home.module.scss';
-import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import { DndProvider,  } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import DroppableArea from './DroppableArea';
 import DraggableItem from './DraggableItem';
@@ -46,7 +46,7 @@ const Home = () => {
   const [items, setItems] = useState(images);
   const [list,setList]=useState(data)
 
-  const handleDrop = (item, index) => {
+  const handleDrop = (item:any, index:any) => {
   
    setList((prev)=>{
     const deepList=JSON.parse(JSON.stringify(prev))

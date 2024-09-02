@@ -1,5 +1,5 @@
 
-import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import {  useDrop } from 'react-dnd';
 
 
 
@@ -18,10 +18,16 @@ const data = [
   {}
 ];
 
+interface DropProps {
+  index: number;
+  onDrop: (item: any,index:any) => void;  // Define the type for `item` based on your needs
+  one: any;  // Adjust the type according to what `one` is supposed to be
+}
 
 
 
-const DroppableArea = ({ index, onDrop,one }) => {
+
+const DroppableArea: React.FC<DropProps> = ({ index, onDrop, one }) => {
   
     const [{ isOver }, drop] = useDrop(() => ({
       accept: 'item',

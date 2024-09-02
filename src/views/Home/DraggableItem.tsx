@@ -1,31 +1,23 @@
-import React, { useState } from 'react';
+
 import style from './Home.module.scss';
-import { DndProvider, useDrag, useDrop } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import {  useDrag,  } from 'react-dnd';
 
 
-const images = [
-  { id: 1, image: 'https://media.istockphoto.com/id/2153544401/photo/group-of-kazakh-eagle-hunters-riding-horses-in-bayan-olgii-west-mongolia.jpg?s=1024x1024&w=is&k=20&c=Ix4AFt4OCqohgvUITKPazJpqI9NKTy9ES108NsOXBvk=' },
-  { id: 2, image: 'https://w7.pngwing.com/pngs/114/579/png-transparent-pink-cross-stroke-ink-brush-pen-red-ink-brush-ink-leave-the-material-text.png' },
-  { id: 3, image: 'https://media.istockphoto.com/id/2153544403/photo/group-of-kazakh-eagle-hunters-riding-horses-along-river-bayan-olgii-west-mongolia.jpg?s=1024x1024&w=is&k=20&c=OBXLVMG8vXTvMIWHQg7a7LSnWAYSqeVT3e0bThrpcPc=' }
-];
 
-const data = [
-  {},
-  {},
-  {},
-  {},
-  {},
-  {}
-];
+
+interface MyComponentProps {
+  image: string;         // Assuming image is a URL or path to an image
+  id: string;            // Assuming id is a unique identifier, probably a string
+  list: Array<string>;   // Assuming list is an array of strings; adjust if needed
+  index: number;         // Assuming index is a numeric index
+}
 
 
 
 
 
 
-
-const DraggableItem = ({ image, id, list, index }) => {
+const DraggableItem: React.FC<MyComponentProps> = ({ image, id, list, index }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'item',
     item: { id, image },
