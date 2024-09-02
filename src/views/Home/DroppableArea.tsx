@@ -35,13 +35,13 @@ const DroppableArea: React.FC<DropProps> = ({ index, onDrop, one }) => {
         alignItems: 'center',
         transform: index < 3 ? 'rotate(180deg)' : 'none',
         borderRadius: 8,
-        height: 324,
-        width: 605
+        height: '100%',
+        width: '100%'
 
       }}>
       {one.image && <img src={one?.image} key={one.id} style={{
-        maxWidth: 324,
-        height:605,
+        maxWidth: 200,
+     height:'120px',
         objectFit:'cover',
       }} />}
 
