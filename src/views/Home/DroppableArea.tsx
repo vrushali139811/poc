@@ -24,11 +24,13 @@ const DroppableArea: React.FC<DropProps> = ({ index, onDrop, one }) => {
     }),
   }), [onDrop]);
 
+
   return (
     <div
       ref={drop}
+      id='de'
       style={{
-        border: `2px dotted white`,
+        border: `2px solid #F1CDAB`,
         padding: 5,
         display: "flex",
         justifyContent: "center",
@@ -36,14 +38,15 @@ const DroppableArea: React.FC<DropProps> = ({ index, onDrop, one }) => {
         transform: index < 3 ? 'rotate(180deg)' : 'none',
         borderRadius: 8,
         height: '100%',
-        width: '100%'
+        width: '100%',
+        backgroundColor:"#01003E"
 
       }}>
-      {one.image && <img src={one?.image} key={one.id} style={{
-        maxWidth: 200,
-     height:'120px',
-        objectFit:'cover',
-      }} />}
+      {one.image ? <img src={one?.image?.image} key={one.id} style={{
+        width: document.getElementById('de')?.offsetWidth - 20,
+        height: document.getElementById('de')?.offsetHeight - 20,
+        objectFit: 'contain',
+      }} />:<p style={{color:"white",fontSize:10,opacity:'0.5'}}>Drag and drop the topics from above timeline for more details</p>}
 
     </div>
   );

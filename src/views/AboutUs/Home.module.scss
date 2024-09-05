@@ -1,0 +1,51 @@
+.HomeContainer {
+  height: 100%;
+}
+
+.container {
+  padding: 20px;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.scrollContainer::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+  scrollbar-width: none;
+  width: 0; /* Hide vertical scrollbar */
+  height: 0; /* Hide horizontal scrollbar */
+}
+
+.pot {
+  animation: scroll-left 100s linear infinite;
+}
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 100%;
+  }
+}
+
+.imageRotation {
+  animation: rotate 50s linear infinite;
+}
+
+@-webkit-keyframes rotate {
+  0% {
+    transform: rotate(-360deg);
+  }
+}

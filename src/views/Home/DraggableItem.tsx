@@ -1,6 +1,8 @@
 
+import CurvedTextCanvas from './CurvedTextCanvas';
+import CurvedText from './CurvedText';
 import style from './Home.module.scss';
-import {  useDrag,  } from 'react-dnd';
+import { useDrag, } from 'react-dnd';
 
 
 
@@ -27,36 +29,48 @@ const DraggableItem: React.FC<MyComponentProps> = ({ image, id, list, index }) =
   }));
 
   return (
-    <div style={{
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: 'center',
 
 
+    <div
+      ref={drag}
 
-    }}>
-      <div
-        ref={drag}
-        className={style.imageRotation}
-        style={{
-          opacity: isDragging ? 0.9 : 1,
-          cursor: 'move',
-          border: '2px dotted white',
-          padding: 5,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: 'center',
-          borderRadius: '100px',
-          transition: 'opacity 0.3s ease',
-          // width:'100%'
-        }}
-      >
-        <img src={image} alt='' style={{ height: '80px', width: '80px', borderRadius: '80px', objectFit: "cover" }} />
+      style={{
+        opacity: isDragging ? 0.9 : 1,
+        cursor: 'move',
+        padding: 5,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: 'center',
+        borderRadius: '100px',
+        transition: 'opacity 0.3s ease',
+        marginLeft: 20,
+        marginRight:20,
+        paddingTop:20,paddingBottom:20,
 
+      }}
+    >
+
+      <div style={{ position: "relative" }}>
+
+
+        <img src={image.image} className={style.imageRotation} alt='' style={{ height: '50px', width: '50px', borderRadius: '80px', objectFit: "cover", border: '2px solid #F1CDAB', position: 'relative',zIndex:10 }} />
+
+
+        <div style={{ position: "absolute", left: "-40%", bottom: "-40%" }}>
+          <CurvedText text='karvan' />
+        </div>
       </div>
-      {index !== list.length - 1 && <div style={{ width: '60px', border: '1px dotted white' }}></div>}
+
+
+
+
+
+
     </div>
+
+
+
+
   );
 };
 
