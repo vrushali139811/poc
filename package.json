@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "i": "^0.3.7",
+    "interactjs": "^1.10.27",
+    "jquery": "^3.7.1",
     "npm": "^10.8.3",
     "react": "^18.2.0",
     "react-dnd": "^16.0.1",
