@@ -1,0 +1,7 @@
+.scrollContainer::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+  scrollbar-width: none;
+  width: 0; /* Hide vertical scrollbar */
+  height: 0; /* Hide horizontal scrollbar */
+  overflow-x: scroll;
+}

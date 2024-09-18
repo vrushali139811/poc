@@ -1,0 +1,70 @@
+/* 
+    Landon Schropp’s technique for breakpoints 
+    usage in other css :
+    @include mixin_name { styles }
+
+*/
+
+$tablet-width: 768px;
+$desktop-width: 1024px;
+$laptop-width: 1366px;
+$mobile-width: 320px;
+$container-width: 1170px;
+$large-container-width: 1440px;
+$large-desktop-width: 2100px;
+$ultra-hd-width: 3840px;
+$eightk-width: 7680px;
+
+@mixin mobile {
+  @media (min-width: #{$mobile-width}) and (max-width: #{$tablet-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) and (max-width: #{$laptop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (max-width: #{$laptop-width}) {
+    @content;
+  }
+}
+
+@mixin container {
+  @media (max-width: #{$container-width}) {
+    @content;
+  }
+}
+
+@mixin largeContainer {
+  @media (min-width: #{$large-container-width}) and (max-width: #{$large-desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin largeDesktop {
+  @media (min-width: #{$large-desktop-width}) {
+    @content;
+  }
+}
+
+@mixin ultraHD {
+  @media (min-width: #{$ultra-hd-width}) {
+    @content;
+  }
+}
+
+@mixin eightK {
+  @media (min-width: #{$eightk-width}) {
+    @content;
+  }
+}

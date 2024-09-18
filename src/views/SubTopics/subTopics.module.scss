@@ -1,0 +1,45 @@
+@import '@styles/breakpoints.scss';
+
+.topicName {
+  color: #f1cdab;
+  font-weight: 600;
+  @include laptop {
+    font-size: 10px; // Laptop and above: already covered by default
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  @include largeContainer {
+    font-size: 20x; // LargeContainer and above
+  }
+
+  @include ultraHD {
+    font-size: 28px; // UltraHD and above
+  }
+
+  @include eightK {
+    font-size: 32px; // EightK and above (overrides previous values)
+  }
+}
+
+.gridContainer {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap onto multiple lines */
+  gap: 10px; /* Optional: space between boxes */
+}
+
+.topic {
+  border: 1px solid #f1cdab;
+  display: flex;
+  flex: 1 1 calc(33.333% - 10px); /* 3 boxes per row minus the gap */
+
+  box-sizing: border-box; /* Includes padding and border in the width */
+  text-align: center; /* Center text horizontally */
+  border-radius: 8px;
+  padding: 8% 2%;
+  justify-content: center;
+  height: 60px;
+  align-items: center;
+  white-space: normal;
+  background-color: #191738;
+}

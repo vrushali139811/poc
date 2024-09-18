@@ -13,6 +13,12 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["src/components/*"],  // Alias configuration
+      "@utils/*": ["src/utils/*"],
+      "@styles/*": ["src/styles/*"],           // Alias for styles
+      "@views/*": ["src/views/*"], 
+    },
 
     /* Linting */
     "strict": true,
