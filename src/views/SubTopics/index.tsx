@@ -17,20 +17,30 @@ interface DataProps {
     central_timeline_details_lists?: TimelineDetail[]; // Array of timeline details
 }
 
-interface SubTopicProps {
-    data: DataProps; // Define data as the above structure
+interface dimensionProps {
+    width:number,
+    height:number
 }
 
-const SubTopic: React.FC<SubTopicProps> = ({ data }) => {
+interface SubTopicProps {
+    data: DataProps; // Define data as the above structure
+    dimensions:dimensionProps
+}
+
+const SubTopic: React.FC<SubTopicProps> = ({ data,dimensions }) => {
     return (
         <div>
             <Header title={data?.title} />
-            <div className={styles.gridContainer}>
+            <div style={{overflow:"scroll",paddingBottom:20,}}>
+            <div className={[styles.gridContainer,styles.scrollContainer].join(' ')} >
                 {data?.central_timeline_details_lists?.map((one, index) => (
                     <div key={index} className={styles.topic}>
+                        <div className={styles.content}>
                         <p className={styles.topicName}>{one?.title}</p>
+                        </div>
                     </div>
                 ))}
+            </div>
             </div>
         </div>
     );

@@ -1,0 +1,29 @@
+.listItem {
+  color: white;
+  overflow-wrap: break-word;
+  white-space: break-spaces;
+  margin-bottom: 2%;
+  margin-left: 1%;
+}
+
+.image {
+  flex: 0 0 30%;
+}
+
+.list {
+  list-style: none;
+}
+
+.container {
+  display: flex;
+  gap: 2%;
+}
+
+.scrollContainer::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+  scrollbar-width: none;
+  width: 0; /* Hide vertical scrollbar */
+  height: 0; /* Hide horizontal scrollbar */
+  overflow-x: scroll;
+  height: 100%;
+}

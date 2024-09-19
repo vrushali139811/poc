@@ -3,7 +3,8 @@
 .title {
   font-size: 12px; // Default font size for small screens
   color: white;
-  font-weight: 900;
+  font-weight: 700;
+  font-family: Poppins;
   margin-bottom: 3%;
 
   @include laptop {
@@ -15,10 +16,10 @@
   }
 
   @include ultraHD {
-    font-size: 16px; // UltraHD and above
+    font-size: 40px; // UltraHD and above
   }
 
   @include eightK {
-    font-size: 32px; // EightK and above (overrides previous values)
+    font-size: 40px; // EightK and above (overrides previous values)
   }
 }
