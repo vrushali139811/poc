@@ -4,6 +4,7 @@
   white-space: break-spaces;
   margin-bottom: 2%;
   margin-left: 1%;
+  font-size: 28px;
 }
 
 .image {
@@ -17,6 +18,7 @@
 .container {
   display: flex;
   gap: 2%;
+  margin-bottom: 2%;
 }
 
 .scrollContainer::-webkit-scrollbar {

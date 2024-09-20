@@ -26,16 +26,18 @@ interface DetailsProps {
 
 
 
-
-const Details: React.FC<DetailsProps> =  ({ data, dimensions }) => {
+const Details: React.FC<DetailsProps> =  ({ data,dimensions:dataDimension }) => {
     const parentRef = useRef(null);
+    const divRef = useRef(null);
+    const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+   
     const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
     
 
 
     const getColumns=()=>{
         
-    let columns= Object.keys(data?.list?.[0]?.table?.content?.[0])?.map(one=>{
+    let columns= Object.keys(data?.list?.[0]?.table?.content?.[0]).filter(one=>one!=='id')?.map(one=>{
       
             return{
                  header:one.toUpperCase(),
@@ -47,32 +49,38 @@ const Details: React.FC<DetailsProps> =  ({ data, dimensions }) => {
     }
 
     useEffect(() => {
-        if(data?.list?.[0]?.image?.url){
+       
         const handleResize = () => {
+            if(data?.list?.[0]?.image?.url){
             if (parentRef.current) {
                 const { offsetWidth, offsetHeight } = parentRef.current;
 
                 setImageDimensions({ width: offsetWidth, height: offsetHeight });
             }
+        }
+            if (divRef.current) {
+                const { clientWidth, clientHeight } = divRef.current;
+                setDimensions({ width: clientWidth, height: clientHeight });
+              }
         };
-
-        // Set initial dimensions
         handleResize();
+      
 
         // Update dimensions on window resize
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }
-    }, []);
+       
+        
+          window.addEventListener('resize', handleResize);
+         
+    }, [data]);
    
     return (
-        <div>
+        <div ref={divRef}  style={{height:'100%'}}>
             <Header title={data?.title} />
            
-            <div style={{ overflow: "scroll", paddingBottom: 20, maxHeight: dimensions.height - 100 }} className={styles.scrollContainer}
+            <div style={{ overflow: "scroll", paddingBottom: 20, maxHeight:dimensions.height*0.75,maxWidth:dimensions.width }} className={styles.scrollContainer}
 >
             <div className={styles.container}>
-                    <ul className={styles.list}>
+                    <ul className={styles.list} style={{maxHeight: dimensions.height*0.75,overflow:'scroll'}}>
                         {data?.list?.[0]?.bullet_points?.map((item:any, index:number) => (
                             <div style={{ display: "flex", flexDirection: "row" }}>
 
@@ -86,15 +94,18 @@ const Details: React.FC<DetailsProps> =  ({ data, dimensions }) => {
                     </ul>
                     {data?.list?.[0]?.image?.url && <div className={styles.image}  ref={parentRef}>
                         <img src={`http://192.168.105.118:8081${data?.list?.[0]?.image?.url}`} style={{
-                            width: imageDimensions.width,
-                            height: imageDimensions.height,
+                            width: dimensions.width*0.3,
+                            height: dimensions.height*0.75,
                             objectFit: 'cover', // Adjusts how the image fills the space
                             borderRadius:15
                            
                         }} />
                     </div>}
                     </div>
-                    {/* {data?.list?.[0]?.table&& <DataTable data={data?.list?.[0]?.table.content} columns={getColumns()}/>} */}
+                    <div style={{width:dimensions.width,overflowX:"hidden",padding:'2%'}}>
+                    {data?.list?.[0]?.table&& <DataTable data={data?.list?.[0]?.table.content} columns={getColumns()}/>}
+                    </div>
+
                         
                 
                 </div>

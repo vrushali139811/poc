@@ -1,10 +1,13 @@
 @import '@styles/breakpoints.scss';
 
 .title {
+  position: sticky;
   font-size: 12px; // Default font size for small screens
   color: white;
   font-weight: 700;
   font-family: Poppins;
+  white-space: break-spaces;
+
   margin-bottom: 3%;
 
   @include laptop {
@@ -12,7 +15,7 @@
   }
 
   @include largeContainer {
-    font-size: 32px; // LargeContainer and above
+    font-size: 40px; // LargeContainer and above
   }
 
   @include ultraHD {

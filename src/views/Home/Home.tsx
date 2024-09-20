@@ -1,13 +1,16 @@
 
 import centralTimeLineList from './mock.json'
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import interact from 'interactjs';
 import style from './Home.module.scss'
 import imageFour from 'assets/images/img4.png'
-
+import BackgroundVideo from 'assets/video/background.mp4'
 import CurvedText from './CurvedText';
 import axios from 'axios'
 import Sections from 'views/Sections'
+import { debounce } from 'lodash';
+
+
 
 const list = centralTimeLineList?.data
 
@@ -25,10 +28,38 @@ const data = [
 
 const Home = () => {
   const [timeLineData,setTimeLineData] = useState(list);
+  const [isScrolling,setIsScrolling]=useState(false)
+    const scrollContainerRef = useRef(null);
   const [dropZones, setDropZones] = useState(data);
   const [apiInProgress,setApiInProgress]=useState(false)
 
   const drop = useRef(null)
+  const [animationDirection, setAnimationDirection] = useState('forward');
+
+ 
+  const handleScrollStop = useCallback(debounce(() => {
+  
+    const scrollable:any = scrollContainerRef.current;
+   
+    if (scrollable.scrollLeft === 0) {
+     setAnimationDirection('forward')
+    }
+    if (scrollable.scrollLeft + scrollable.clientWidth >= scrollable.scrollWidth-1000) {
+     
+      setAnimationDirection('reverse')
+    }
+    setIsScrolling(false) 
+  }, 2000), []);
+
+
+  const handleScroll = () => {
+    setIsScrolling(true); // Animation moves forward on scroll
+    handleScrollStop();
+  };
+
+
+
+  
 
 
   const  getCentralTimeLineData=async()=>{
@@ -38,10 +69,15 @@ const Home = () => {
      setTimeLineData(data?.data)
      setApiInProgress(false)
    } catch (error) {
-    console.log(error)
+   
     setApiInProgress(false)
    }
   }
+
+
+
+
+
 
 
   useEffect(()=>{
@@ -151,7 +187,11 @@ const Home = () => {
  if (apiInProgress)  return  <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:'100%'}}><div className={style.loader}></div></div>
 
   return (
+<div className={style.main}>
+  <video autoPlay loop muted className={style.video}>
+  <source src={BackgroundVideo} type="video/mp4" />
 
+  </video>
     <div className={style.HomeContainer}>
       <div className={style.container}>
         <div className={style.flexColumnContainer}>
@@ -174,12 +214,13 @@ const Home = () => {
             })}
           </div>
           <div className={[style.relativePosition].join(' ')} >
-            <div className={style.scrollContainer} style={{ overflow: "auto",height:'100%' }}>
-              <div id="circle-container" className={["circle-container", style.pot].join(' ')} >
+            <div ref={scrollContainerRef} className={style.scrollContainer} style={{ overflow: "scroll",height:'100%' }}        onScroll={handleScroll}
+            >
+              <div id="circle-container" className={["circle-container", `${isScrolling?style.potWithoutScroll:animationDirection==='forward'?style.pot:style.reversePot}`].join(' ')}  >
                 {timeLineData?.en?.map((one: any, index) => (
-                  <div className={style.potItem}  key={index}>
+                  <div className={style.potItem}   key={index}>
                     <p className={[style.textStyle, style.rotatedText].join(" ")}>{one.tabTitle}</p>
-                    <div style={{display:"flex",alignItems:"center"}}>
+                    <div style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
                     {one?.central_timeline_elements?.map((timeline:any,timeLineIndex:number)=>{
 
                       return(<div key={timeLineIndex} className="box"
@@ -204,8 +245,8 @@ const Home = () => {
                         className={'draggable-item'}
                       >
                         <div style={{ position: "relative" }} className="circle">
-                          <img src={timeline?.icon?.url?`http://192.168.105.118:8081${timeline?.icon?.url}`:imageFour} className={style.imageRotation} alt='' style={{ height: '90px', width: '90px', borderRadius: '90px', objectFit: "cover", border: '2px solid #F1CDAB', position: 'relative', zIndex: 10, transform:"rotate(-45deg)" }} />
-                          <div style={{ position: "absolute", left: "-28%", bottom: "-26%" }}>
+                          <img src={timeline?.icon?.url?`http://192.168.105.118:8081${timeline?.icon?.url}`:imageFour} className={style.imageRotation} alt='' style={{ height: '70px', width: '70px', borderRadius: '90px', objectFit: "cover", border: '2px solid #F1CDAB', position: 'relative', zIndex: 10, transform:"rotate(-45deg)",backgroundColor:"#01003E" }} />
+                          <div style={{ position: "absolute", left: "-15%", bottom: "-15%" }}>
                             <CurvedText label={timeline.iconTitle} />
                           </div>
 
@@ -242,6 +283,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
 
   );

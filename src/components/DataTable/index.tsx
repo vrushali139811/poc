@@ -1,10 +1,11 @@
 import {
-    createColumnHelper,
+ 
     flexRender,
     getCoreRowModel,
     useReactTable,
 } from '@tanstack/react-table'
 import { ColumnDef } from '@tanstack/react-table';
+import styles from './dataTbale.module.scss'
 
 export interface ITanStackDataTable {
     data: any[];
@@ -23,12 +24,12 @@ const DataTable : React.FC<ITanStackDataTable> =({data,columns})=> {
       })
     return (
         <div>
-            <table >
-                <thead >
+            <table style={{ borderCollapse: 'collapse',borderSpacing:0, width: '100%',tableLayout:"fixed" }}>
+                <thead>
                     {table.getHeaderGroups().map(headerGroup => (
                         <tr key={headerGroup.id}>
                             {headerGroup.headers.map(header => (
-                                <th key={header.id} >
+                                <th key={header.id} className={styles.th}  style={{ borderCollapse:"collapse",outline: '1px solid rgba(255, 255, 255, 0.3)',textAlign:"left"}}>
                                     {header.isPlaceholder
                                         ? null
                                         : flexRender(
@@ -44,7 +45,7 @@ const DataTable : React.FC<ITanStackDataTable> =({data,columns})=> {
                     {table.getRowModel().rows.map(row => (
                         <tr key={row.id}>
                             {row.getVisibleCells().map(cell => (
-                                <td key={cell.id} style={{color:"white"}}>
+                                <td key={cell.id} style={{color:"white",borderCollapse:"collapse",  outline: '1px solid rgba(255, 255, 255, 0.3)',overflowWrap:"break-word",whiteSpace:"normal",wordWrap:"break-word",padding:'2%'}}>
                                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                 </td>
                             ))}
