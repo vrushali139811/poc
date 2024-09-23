@@ -16,15 +16,6 @@ const CurvedText: React.FC<ICurvedText>=({ label })=> {
       </defs>
       <text fill="#F1CDAB" font-size="10" letterSpacing={'1'} fontWeight={'semi-bold'} >
         <textPath xlinkHref="#circle">{label}</textPath>
-        <animateTransform
-          attributeName="transform"
-          type="rotate"
-         
-          from="0 45 45"
-          to="360 45 45"
-          dur="30s"
-          repeatCount="indefinite"
-        />
       </text>
     </svg>
   );
