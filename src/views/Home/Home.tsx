@@ -54,7 +54,10 @@ const Home = () => {
 
   const handleScroll = () => {
     setIsScrolling(true); // Animation moves forward on scroll
-    handleScrollStop();
+    // handleScrollStop();
+    requestAnimationFrame(() => {
+      handleScrollStop();
+    });
   };
 
 
@@ -188,7 +191,7 @@ const Home = () => {
 
   return (
 <div className={style.main}>
-  <video autoPlay loop muted className={style.video}>
+  <video autoPlay loop muted className={style.video} preload='auto'>
   <source src={BackgroundVideo} type="video/mp4" />
 
   </video>
@@ -244,8 +247,8 @@ const Home = () => {
                         }}
                         className={'draggable-item'}
                       >
-                        <div style={{ position: "relative" }} className="circle">
-                          <img src={timeline?.icon?.url?`http://192.168.105.118:8081${timeline?.icon?.url}`:imageFour} className={style.imageRotation} alt='' style={{ height: '70px', width: '70px', borderRadius: '90px', objectFit: "cover", border: '2px solid #F1CDAB', position: 'relative', zIndex: 10, transform:"rotate(-45deg)",backgroundColor:"#01003E" }} />
+                        <div style={{ position: "relative" }}  className={style.imageRotation}>
+                          <img src={timeline?.icon?.url?`http://192.168.105.118:8081${timeline?.icon?.url}`:imageFour}  alt='' style={{ height: '70px', width: '70px', borderRadius: '90px', objectFit: "cover", border: '2px solid #F1CDAB', position: 'relative', zIndex: 10, transform:"rotate(-45deg)",backgroundColor:"#01003E" }} />
                           <div style={{ position: "absolute", left: "-15%", bottom: "-15%" }}>
                             <CurvedText label={timeline.iconTitle} />
                           </div>
