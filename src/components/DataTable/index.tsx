@@ -27,9 +27,9 @@ const DataTable : React.FC<ITanStackDataTable> =({data,columns})=> {
             <table style={{ borderCollapse: 'collapse',borderSpacing:0, width: '100%',tableLayout:"fixed" }}>
                 <thead>
                     {table.getHeaderGroups().map(headerGroup => (
-                        <tr key={headerGroup.id}>
+                        <tr key={headerGroup.id} >
                             {headerGroup.headers.map(header => (
-                                <th key={header.id} className={styles.th}  style={{ borderCollapse:"collapse",outline: '1px solid rgba(255, 255, 255, 0.3)',textAlign:"left"}}>
+                                <th key={header.id} className={styles.th}  style={{ borderCollapse:"collapse",outline: '1px solid rgba(255, 255, 255, 0.3)',textAlign:"left",padding:"2%"}}>
                                     {header.isPlaceholder
                                         ? null
                                         : flexRender(

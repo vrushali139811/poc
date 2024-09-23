@@ -7,6 +7,7 @@
   font-weight: 700;
   font-family: Poppins;
   white-space: break-spaces;
+  padding-left: 16px;
 
   margin-bottom: 3%;
 
@@ -15,7 +16,7 @@
   }
 
   @include largeContainer {
-    font-size: 40px; // LargeContainer and above
+    font-size: 20px; // LargeContainer and above
   }
 
   @include ultraHD {
@@ -25,4 +26,12 @@
   @include eightK {
     font-size: 40px; // EightK and above (overrides previous values)
   }
+}
+
+.container {
+  display: flex;
+}
+
+.icon {
+  font-size: 40px;
 }

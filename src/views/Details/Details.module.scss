@@ -1,10 +1,12 @@
 .listItem {
-  color: white;
+  color: rgba(255, 255, 255, 1);
   overflow-wrap: break-word;
   white-space: break-spaces;
   margin-bottom: 2%;
   margin-left: 1%;
-  font-size: 28px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
 }
 
 .image {
@@ -22,10 +24,20 @@
 }
 
 .scrollContainer::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
-  scrollbar-width: none;
-  width: 0; /* Hide vertical scrollbar */
-  height: 0; /* Hide horizontal scrollbar */
+  // display: none; /* Safari and Chrome */
+  scrollbar-width: 2px;
+  width: 2px; /* Hide vertical scrollbar */
+  /* Hide horizontal scrollbar */
   overflow-x: scroll;
   height: 100%;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb {
+  background: #8d8da9;
+  height: 5px;
+  border-radius: 25px;
+}
+
+.scrollContainer::-webkit-scrollbar-track-piece {
+  background: #1b1a52;
 }

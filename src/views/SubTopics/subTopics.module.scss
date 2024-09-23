@@ -5,11 +5,11 @@
   font-weight: 500;
   font-family: Poppins;
   @include laptop {
-    font-size: 10px; // Laptop and above: already covered by default
+    font-size: 16px; // Laptop and above: already covered by default
   }
 
   @include largeContainer {
-    font-size: 20x; // LargeContainer and above
+    font-size: 16px; // LargeContainer and above
   }
 
   @include ultraHD {
@@ -36,6 +36,7 @@
   background-clip: content-box, border-box;
   background-color: #191738;
   display: flex;
+  width: 32%;
   flex: 1 1 calc(33.333% - 10px); /* 3 boxes per row minus the gap */
 
   box-sizing: border-box; /* Includes padding and border in the width */
