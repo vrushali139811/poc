@@ -1,12 +1,13 @@
 import centralTimeLineList from './mock.json';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import interact from 'interactjs';
 import style from './Home.module.scss';
 import imageFour from 'assets/images/img4.png';
 import CurvedText from './CurvedText';
 import axios from 'axios';
 import Sections from 'views/Sections';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, debounce } from 'lodash';
+import BackgroundVideo from 'assets/video/background.mp4';
 
 const list = centralTimeLineList?.data;
 
@@ -14,11 +15,36 @@ const data = [{}, {}, {}, {}, {}, {}];
 
 const Home = () => {
   const [timeLineData, setTimeLineData] = useState(list);
-
+  const [isScrolling, setIsScrolling] = useState(false);
+  const scrollContainerRef = useRef(null);
   const [dropZones, setDropZones] = useState(data);
   const [apiInProgress, setApiInProgress] = useState(false);
 
   const drop = useRef(null);
+  const [animationDirection, setAnimationDirection] = useState('forward');
+
+  const handleScrollStop = useCallback(
+    debounce(() => {
+      const scrollable: any = scrollContainerRef.current;
+
+      if (scrollable.scrollLeft === 0) {
+        setAnimationDirection('forward');
+      }
+      if (scrollable.scrollLeft + scrollable.clientWidth >= scrollable.scrollWidth - 1000) {
+        setAnimationDirection('reverse');
+      }
+      setIsScrolling(false);
+    }, 2000),
+    [],
+  );
+
+  const handleScroll = () => {
+    setIsScrolling(true); // Animation moves forward on scroll
+    // handleScrollStop();
+    requestAnimationFrame(() => {
+      handleScrollStop();
+    });
+  };
 
   const getCentralTimeLineData = async () => {
     try {
@@ -150,9 +176,9 @@ const Home = () => {
 
   return (
     <div className={style.main}>
-      {/* <video autoPlay loop muted className={style.video}>
+      <video autoPlay loop muted className={style.video} preload="auto">
         <source src={BackgroundVideo} type="video/mp4" />
-      </video> */}
+      </video>
       <div className={style.HomeContainer}>
         <div className={style.container}>
           <div className={style.flexColumnContainer}>
@@ -174,8 +200,8 @@ const Home = () => {
                       {Object.keys(zone)?.length ? (
                         <Sections
                           data={zone}
-                          index={index}
                           dimensions={dimensions}
+                          index={index}
                           onBackHandler={onBackHandler}
                           onSubTopicClickHandler={onSubTopicClickHandler}
                         />
@@ -200,8 +226,25 @@ const Home = () => {
               })}
             </div>
             <div className={[style.relativePosition].join(' ')}>
-              <div className={style.scrollContainer} style={{ overflow: 'scroll', height: '100%' }}>
-                <div id="circle-container" className={['circle-container', style.pot].join(' ')}>
+              <div
+                ref={scrollContainerRef}
+                className={style.scrollContainer}
+                style={{ overflow: 'scroll', height: '100%' }}
+                onScroll={handleScroll}
+              >
+                <div
+                  id="circle-container"
+                  className={[
+                    'circle-container',
+                    `${
+                      isScrolling
+                        ? style.potWithoutScroll
+                        : animationDirection === 'forward'
+                        ? style.pot
+                        : style.reversePot
+                    }`,
+                  ].join(' ')}
+                >
                   {timeLineData?.en?.map((one: any, index) => (
                     <div className={style.potItem} key={index}>
                       <p className={[style.textStyle, style.rotatedText].join(' ')}>{one.tabTitle}</p>
@@ -231,14 +274,13 @@ const Home = () => {
                                 }}
                                 className={'draggable-item'}
                               >
-                                <div style={{ position: 'relative' }} className="circle">
+                                <div style={{ position: 'relative' }} className={style.imageRotation}>
                                   <img
                                     src={
                                       timeline?.icon?.url
                                         ? `http://192.168.105.118:8081${timeline?.icon?.url}`
                                         : imageFour
                                     }
-                                    className={style.imageRotation}
                                     alt=""
                                     style={{
                                       height: '70px',
