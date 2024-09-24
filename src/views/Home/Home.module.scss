@@ -21,12 +21,12 @@
 
 .video {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 100%;
+  left: 100%;
   min-width: 100%;
   min-height: 100%;
-  width: auto;
-  height: auto;
+  // width: auto;
+  // height: auto;
   z-index: -1;
   transform: translate(-50%, -50%);
 }
@@ -102,7 +102,7 @@
 
 .pot {
   position: relative;
-  // animation: scroll-left 150s linear infinite;
+  animation: scroll-left 150s linear infinite;
 
   display: flex;
   padding: 10px;
@@ -115,7 +115,7 @@
 
 .reversePot {
   position: relative;
-  // animation: scroll-right 150s linear infinite;
+  animation: scroll-right 150s linear infinite;
 
   display: flex;
   padding: 10px;
@@ -140,6 +140,7 @@
 
 .potWithoutScroll {
   position: relative;
+  animation: scroll-right 150s linear infinite;
   display: flex;
   padding: 10px;
   height: 100%;

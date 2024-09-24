@@ -73,7 +73,7 @@ const Details: React.FC<DetailsProps> = ({ data, step, onBackHandler }) => {
 
       <div
         style={{
-          overflow: 'scroll',
+          overflow: data?.list?.[0]?.table ? 'scroll' : '',
           paddingBottom: 20,
           maxHeight: (dimensions.height - headerDimensions.height) * 0.94,
           maxWidth: dimensions.width,
@@ -107,17 +107,19 @@ const Details: React.FC<DetailsProps> = ({ data, step, onBackHandler }) => {
             </div>
           )}
         </div>
-        <div
-          style={{
-            width: dimensions.width,
-            overflowX: 'hidden',
-            paddingTop: '20px',
-            paddingLeft: 20,
-            paddingRight: 20,
-          }}
-        >
-          {data?.list?.[0]?.table && <DataTable data={data?.list?.[0]?.table.content} columns={getColumns()} />}
-        </div>
+        {data?.list?.[0]?.table && (
+          <div
+            style={{
+              width: dimensions.width,
+              overflowX: 'hidden',
+              paddingTop: '20px',
+              paddingLeft: 20,
+              paddingRight: 20,
+            }}
+          >
+            <DataTable data={data?.list?.[0]?.table.content} columns={getColumns()} />
+          </div>
+        )}
       </div>
     </div>
   );
