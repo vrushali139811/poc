@@ -21,12 +21,12 @@
 
 .video {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 100%;
+  left: 100%;
   min-width: 100%;
   min-height: 100%;
-  width: auto;
-  height: auto;
+  // width: auto;
+  // height: auto;
   z-index: -1;
   transform: translate(-50%, -50%);
   object-fit: cover; /* Ensures the video covers the area without distortion */
@@ -52,7 +52,7 @@
 .scrollContainer::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
   scrollbar-width: none;
-  width: 0; /* Hide vertical scrollbar */
+  width: 2px; /* Hide vertical scrollbar */
   height: 0; /* Hide horizontal scrollbar */
   overflow-x: scroll;
   height: 100%;
@@ -153,7 +153,7 @@
 
 .potWithoutScroll {
   position: relative;
-
+  animation: scroll-right 150s linear infinite;
   display: flex;
   padding: 10px;
   height: 100%;
@@ -298,7 +298,7 @@
   border: 2px solid #f1cdab;
   max-height: 100%;
   width: 100%;
-  background-color: '#01003E';
+  background-color: #01003e;
   @include ultraHD {
     border-radius: 4rem;
   }
@@ -308,7 +308,7 @@
   }
 
   @include largeContainer {
-    border-radius: 2rem;
+    border-radius: 20px;
   }
 
   @include laptop {
